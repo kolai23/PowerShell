@@ -8,10 +8,7 @@ Import-Module ActiveDirectory
 $exch = New-PSSession -ConfigurationName Microsoft.Exchange -ConnectionUri http://ltex02.capital.local/powershell/ -ErrorAction SilentlyContinue
 Import-PSSession $exch -ErrorAction SilentlyContinue
 
-$users = 'vabischevich'
-$userss = 'vabischevich@telsglobal.com'
 Get-Mailbox $userss | Format-List ForwardingSMTPAddress,DeliverToMailboxandForward
-$redirectuser = 'kozhemyako@ctconsult.by'
 
 $request = Get-ADUser $users  -Properties Enabled
 
@@ -25,4 +22,3 @@ if ($request.Enabled -eq $true){
     Set-Mailbox $username -DeliverToMailboxAndForward $true -ForwardingSMTPAddress $redirectuser
     
 }
-Get-Mailbox $userss | Format-List ForwardingSMTPAddress,DeliverToMailboxandForward
